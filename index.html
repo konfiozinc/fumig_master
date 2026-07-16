@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-950 select-none">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="theme-color" content="#dc2626"/>
+    <title>Fumig Master - Tarjeta Digital Profesional</title>
+    
+    <!-- Tailwind CSS & Iconografía Premium -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* Wow Effect: Brillo perimetral dinámico color rojo/alerta industrial */
+        @keyframes hazardGlow {
+            0%, 100% { border-color: rgba(220, 38, 38, 0.4); box-shadow: 0 0 12px rgba(220, 38, 38, 0.2); }
+            50% { border-color: rgba(15, 23, 42, 0.8); box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
+        }
+        .wow-profile { animation: hazardGlow 4s infinite ease-in-out; }
+        
+        /* Conversión: Pulso controlado para botón principal de WhatsApp */
+        @keyframes whatsappPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 20px -4px rgba(37, 211, 102, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 14px 25px -4px rgba(37, 211, 102, 0.6); }
+        }
+        .pulse-whatsapp { animation: whatsappPulse 2s infinite ease-in-out; }
+        
+        .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { background: #ffffff; border-radius: 28px; width: 100%; max-w: 326px; transform: scale(0.96); transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); border: 1px solid rgba(220, 38, 38, 0.15); }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .app-container { height: 100vh; height: 100dvh; }
+        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e293b; color: #fff; padding: 8px 20px; border-radius: 999px; font-size: 13px; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 2000; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body class="bg-slate-950 w-full flex justify-center items-center overflow-hidden">
+
+    <!-- 1. MODULO: SPLASH SCREEN -->
+    <div id="splash" class="fixed inset-0 bg-slate-900 flex flex-col items-center justify-center z-[9999] transition-opacity duration-400">
+        <div class="text-center animate-pulse">
+            <div class="w-20 h-20 mx-auto bg-gradient-to-tr from-red-600 to-red-500 rounded-full flex items-center justify-center shadow-2xl border-4 border-white mb-3">
+                <i class="fas fa-spray-can text-3xl text-white"></i>
+            </div>
+            <h1 class="text-2xl font-black text-white tracking-wider">FUMIG MASTER</h1>
+            <p class="text-red-400 text-[10px] font-bold uppercase tracking-widest mt-1">¡Di adiós a las plagas!</p>
+        </div>
+    </div>
+
+    <!-- CHASIS APP PREMIUM FIJA (MANDATORIO: SIN SCROLL DE FONDO) -->
+    <div class="app-container w-full max-w-[380px] bg-[#fff] relative flex flex-col justify-between overflow-hidden shadow-2xl">
+        
+        <!-- CONTENIDO INTERNO DE PANTALLA -->
+        <div class="flex-grow flex flex-col justify-between pb-28 overflow-y-auto">
+            
+            <!-- 2. MODULO: PORTADA & HERO -->
+            <header class="relative bg-gradient-to-b from-red-600 via-red-700 to-red-800 pt-6 pb-6 px-5 text-center text-white rounded-b-[40px] shadow-2xl flex-shrink-0 border-b border-red-900/20">
+                <div class="absolute top-3 right-4 bg-slate-900 text-white font-black px-2.5 py-0.5 rounded-full text-[8px] uppercase tracking-wider shadow-md">
+                    Eficacia Garantizada
+                </div>
+                
+                <!-- Título Superior -->
+                <h2 class="text-3xl font-black text-white mt-2 tracking-tight">Fumig Master</h2>
+                <p class="text-red-100 font-bold text-[10px] uppercase tracking-widest mt-0.5">Manejo Integrado de Plagas</p>
+                
+                <!-- ZONA CENTRAL DE SEGURIDAD DEL LOGO (EVITA CORTES EN MÓVILES) -->
+                <div class="w-24 h-24 mx-auto bg-white rounded-full flex flex-col items-center justify-center border-4 wow-profile p-1.5 my-3 shadow-lg block relative">
+                    <svg class="w-12 h-12 text-red-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2a5 5 0 0 0-5 5v3H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-4h1a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V7a5 5 0 0 0-5-5zm3 8H9V7a3 3 0 0 1 6 0v3z"/>
+                    </svg>
+                    <span class="font-black text-[7px] text-slate-900 tracking-tighter uppercase mt-0.5">FUMIG MASTER</span>
+                </div>
+                
+                <!-- Eslogan de la tarjeta -->
+                <div class="bg-black/30 rounded-xl p-2 max-w-[220px] mx-auto shadow-inner">
+                    <span class="text-[10px] block text-white font-bold uppercase tracking-wide"><i class="fas fa-ban mr-1"></i> ¡Di adiós a las plagas!</span>
+                </div>
+            </header>
+
+            <!-- CONTENIDO CENTRAL OPERATIVO -->
+            <div class="px-5 space-y-3.5 flex-grow flex flex-col justify-center mt-2">
+                
+                <!-- 3. MODULO: BOTONES RÁPIDOS / CTA DE ALTA CONVERSIÓN -->
+                <div class="fade-in-up">
+                    <a href="https://wa.me/573013600313?text=Hola%20Fumig%20Master,%20solicito%20un%20servicio%20especializado%20de%20fumigaci%C3%B3n%20para%20eliminar%20una%20plaga." target="_blank" class="w-full flex items-center justify-center bg-[#25D366] text-white font-black py-3.5 px-4 rounded-xl text-center text-xs uppercase tracking-wider transition-transform transform active:scale-95 pulse-whatsapp">
+                        <i class="fab fa-whatsapp text-xl mr-2 text-white"></i>Solicitar Servicio Ya
+                    </a>
+                </div>
+
+                <!-- 5. MODULO: SERVICIOS RESUMIDOS (GLASSMORPHISM CARDS) -->
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl flex items-center gap-2 shadow-sm">
+                        <div class="w-6 h-6 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xs flex-shrink-0 shadow-inner"><i class="fas fa-bug"></i></div>
+                        <span class="text-[10px] font-bold text-slate-700 leading-tight">Cucarachas & Chinches</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl flex items-center gap-2 shadow-sm">
+                        <div class="w-6 h-6 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xs flex-shrink-0 shadow-inner"><i class="fas fa-ant"></i></div>
+                        <span class="text-[10px] font-bold text-slate-700 leading-tight">Hormigas & Insectos</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl flex items-center gap-2 shadow-sm">
+                        <div class="w-6 h-6 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xs flex-shrink-0 shadow-inner"><i class="fas fa-shield-virus"></i></div>
+                        <span class="text-[10px] font-bold text-slate-700 leading-tight">Control de Roedores</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl flex items-center gap-2 shadow-sm">
+                        <div class="w-6 h-6 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-xs flex-shrink-0 shadow-inner"><i class="fas fa-house-medical"></i></div>
+                        <span class="text-[10px] font-bold text-slate-700 leading-tight">Protección Hogar</span>
+                    </div>
+                </div>
+
+                <!-- ENLACE TELEFÓNICO DIRECTO NATIVO -->
+                <div class="fade-in-up">
+                    <a href="tel:+573013600313" class="w-full bg-slate-100 border border-slate-200 py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 text-[10px] font-bold text-red-600 transition-colors hover:bg-slate-200">
+                        <i class="fas fa-phone animate-pulse"></i> Llamar Línea Directa: 301 360 0313
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 11. MODULO: CTA ACCIONES COMPLEMENTARIAS -->
+            <div class="px-5 mt-auto pt-2">
+                <button id="btn-vcard" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-wider border border-slate-700 shadow-md">
+                    <i class="fas fa-address-card text-red-500"></i> Guardar Contacto en Agenda
+                </button>
+            </div>
+        </div>
+
+        <!-- 4 y 12. BARRA DE NAVEGACIÓN INFERIOR & PIE DE TARJETA CON TU MARCA -->
+        <div class="absolute bottom-0 inset-x-0 bg-slate-950 border-t border-slate-800 z-20 flex flex-col shadow-2xl">
+            <nav class="px-2 py-2.5 flex justify-around items-center">
+                <button id="nav-services" class="flex flex-col items-center justify-center text-slate-400 hover:text-red-500 w-12 transition-colors">
+                    <i class="fas fa-bug text-base"></i><span class="text-[9px] font-bold mt-1">Servicios</span>
+                </button>
+                <button id="nav-gallery" class="flex flex-col items-center justify-center text-slate-400 hover:text-red-500 w-12 transition-colors">
+                    <i class="fas fa-images text-base"></i><span class="text-[9px] font-bold mt-1">Evidencia</span>
+                </button>
+                <button id="nav-testimonials" class="flex flex-col items-center justify-center text-slate-400 hover:text-red-500 w-12 transition-colors">
+                    <i class="fas fa-shield-halved text-base"></i><span class="text-[9px] font-bold mt-1">Garantía</span>
+                </button>
+                <button id="nav-coverage" class="flex flex-col items-center justify-center text-slate-400 hover:text-red-500 w-12 transition-colors">
+                    <i class="fas fa-clock text-base"></i><span class="text-[9px] font-bold mt-1">Horarios</span>
+                </button>
+                <button id="nav-share" class="flex flex-col items-center justify-center text-slate-400 hover:text-red-500 w-12 transition-colors">
+                    <i class="fas fa-qrcode text-base"></i><span class="text-[9px] font-bold mt-1">QR</span>
+                </button>
+            </nav>
+            <!-- SELLO OFICIAL DE MARCA MANDATORIO V2.0 -->
+            <div class="text-center text-[8px] tracking-wider text-slate-600 font-medium bg-slate-950 pb-1.5 uppercase">
+                Creado por KONFÍO ZINC — Todos los derechos reservados
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ELEMENTOS EMERGENTES MODULARES ================= -->
+    
+    <!-- 5. SERVICIOS DETALLADOS -->
+    <div id="modal-services" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-red-700 text-white p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-red-800">
+                <span><i class="fas fa-briefcase mr-2"></i>Servicios Especializados</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-4 max-h-[60vh] overflow-y-auto space-y-3.5 text-slate-800">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-red-700 text-xs uppercase">Eliminación de Rastreros y Voladores</h4>
+                    <p class="text-[11px] text-slate-600 mt-1 leading-normal">Control total contra infestaciones severas de cucarachas, hormigas, chinches de cama y pulgas bajo estrictos estándares técnicos.</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-red-700 text-xs uppercase">Desratización Estructurada</h4>
+                    <p class="text-[11px] text-slate-600 mt-1 leading-normal">Sistemas de cebado seguro y trampeo profesional para erradicar y prevenir roedores en áreas residenciales o comerciales.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6 y 7. GALERÍA -->
+    <div id="modal-gallery" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-red-700 text-white p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-red-800">
+                <span><i class="fas fa-images mr-2"></i>Eficacia en Campo</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-4 space-y-3">
+                <div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=400" alt="Fumigación de espacios" class="w-full h-32 object-cover opacity-80">
+                    <p class="text-[10px] p-2 text-slate-400 text-center font-medium">Procedimientos seguros con productos certificados de baja toxicidad para tu familia y mascotas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. TESTIMONIOS -->
+    <div id="modal-testimonials" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-red-700 text-white p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-red-800">
+                <span><i class="fas fa-shield-halved mr-2"></i>Garantía Certificada</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-4 space-y-3 text-slate-800">
+                <div class="bg-red-50 p-3 rounded-xl border border-red-100">
+                    <h4 class="font-bold text-red-900 text-xs uppercase">Eficacia Garantizada</h4>
+                    <p class="text-[11px] text-slate-700 italic leading-relaxed mt-1">Protege tu hogar y negocio con nuestra metodología técnica de choque y prevención. ¡Llama hoy y vive libre de plagas!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9 y 10. COBERTURA E INFORMACIÓN -->
+    <div id="modal-coverage" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-red-700 text-white p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-red-800">
+                <span><i class="fas fa-clock mr-2"></i>Horarios e Información</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-4 space-y-3 text-slate-800 text-[11px]">
+                <div class="p-3 bg-slate-50 rounded-xl border flex items-start gap-2.5">
+                    <i class="fas fa-shield-virus text-red-600 text-sm mt-0.5"></i>
+                    <div>
+                        <h5 class="font-bold text-slate-800">Atención Residencial & Comercial</h5>
+                        <p class="text-[10px] text-slate-500 mt-0.5 font-semibold">Validación inmediata de disponibilidad técnica vía WhatsApp.</p>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border space-y-1.5 font-medium">
+                    <div class="flex justify-between border-b pb-1"><span>Comunidad / Redes:</span><span class="text-blue-700 font-bold">@Fumigmaster</span></div>
+                    <div class="flex justify-between"><span>Atención Técnica:</span><span class="text-emerald-700 font-bold">Lunes a Sábado</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR COMPARTIR -->
+    <div id="modal-qr" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-red-700 text-white p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-red-800">
+                <span><i class="fas fa-qrcode mr-2"></i>Compartir Perfil</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-5 text-center">
+                <div id="qrcode" class="flex justify-center p-2.5 bg-white border border-slate-200 rounded-xl inline-block mx-auto shadow-sm"></div>
+                <p class="text-[10px] text-slate-500 mt-3 px-1 leading-normal">Escanea este código desde otro celular para abrir instantáneamente la Tarjeta Digital de Fumig Master.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Desvanecimiento controlado de la Splash Screen
+            setTimeout(() => {
+                const splash = document.getElementById('splash');
+                if(splash) {
+                    splash.style.opacity = '0';
+                    setTimeout(() => splash.style.display = 'none', 400);
+                }
+            }, 1000);
+
+            // Controlador de Modales
+            const setupAppModal = (triggerId, modalId) => {
+                const trigger = document.getElementById(triggerId);
+                const modal = document.getElementById(modalId);
+                if (!trigger || !modal) return;
+                
+                trigger.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); });
+                modal.querySelector('.close-modal').addEventListener('click', () => modal.classList.remove('active'));
+                modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('active'); });
+            };
+
+            const urlReal = window.location.href;
+
+            // Inicializar botones táctiles de la barra inferior
+            setupAppModal('nav-services', 'modal-services');
+            setupAppModal('nav-gallery', 'modal-gallery');
+            setupAppModal('nav-testimonials', 'modal-testimonials');
+            setupAppModal('nav-coverage', 'modal-coverage');
+            setupAppModal('nav-share', 'modal-qr');
+
+            // Generador de QR dinámico a la URL activa
+            const qrBox = document.getElementById("qrcode");
+            if(qrBox) {
+                new QRCode(qrBox, {
+                    text: urlReal,
+                    width: 144,
+                    height: 144,
+                    colorDark : "#dc2626",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+            }
+
+            // Toast de Feedback
+            const toast = document.getElementById('toast');
+            const showToast = (msg) => { 
+                toast.textContent = msg; 
+                toast.classList.add('show'); 
+                setTimeout(() => toast.classList.remove('show'), 2200); 
+            };
+
+            // Descarga de tarjeta vCard corporativa (.vcf)
+            const btnVcard = document.getElementById('btn-vcard');
+            if (btnVcard) {
+                btnVcard.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Fumig Master\nORG:Fumigacion Profesional\nTEL;TYPE=CELL,VOICE;PREF=1:+573013600313\nNOTE:Control especializado de cucarachas, hormigas, chinches y roedores.\nURL:${urlReal}\nEND:VCARD`;
+                    const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'Fumig_Master_Contacto.vcf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
