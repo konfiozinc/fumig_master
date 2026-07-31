@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="theme-color" content="#dc2626"/>
-    <title>Fumig Master - Tarjeta Digital</title>
+    <title>Fumig Master - Tarjeta Digital Pro</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Script de QR dinámico autónomo -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
         
-        * { font-family: 'Inter', system-ui, -apple-system, sans-serif; box-sizing: border-box; }
+        * { font-family: 'Inter', system-ui, -apple-system, sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #0f172a; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
+        /* Chasis Fijo Móvil (380px max-width) */
         .card-container {
             width: 100%;
             max-width: 380px;
@@ -26,14 +26,17 @@
             overflow: hidden;
             position: relative;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #dc2626;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
         }
 
+        /* Header Rojo Corporativo */
         .card-header {
             background: linear-gradient(135deg, #dc2626, #b91c1c);
             color: white;
-            padding: 24px 20px 24px 20px;
+            padding: 24px 20px 20px 20px;
             text-align: center;
             border-bottom-left-radius: 32px;
             border-bottom-right-radius: 32px;
@@ -66,8 +69,35 @@
             border-radius: 20px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
+        .title-main { font-size: 22px; font-weight: 900; color: #ffffff; margin: 0; }
+        .title-sub { font-size: 11px; font-weight: 700; color: #fecdd3; margin-top: 2px; }
+
+        .promo-banner {
+            margin-top: 8px;
+            background: rgba(0,0,0,0.25);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* Cuerpo Interactivo */
+        .content-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+        }
+
+        /* Botón WhatsApp */
         .btn-whatsapp {
             background-color: #25d366;
             color: white;
@@ -83,10 +113,9 @@
             gap: 8px;
             text-decoration: none;
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
-            transition: transform 0.2s;
         }
-        .btn-whatsapp:active { transform: scale(0.98); }
 
+        /* Grilla de Servicios con SVGs */
         .grid-services {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -110,11 +139,44 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
             flex-shrink: 0;
         }
         .service-text { font-size: 10px; font-weight: 700; color: #334155; line-height: 1.2; }
 
+        .btn-phone {
+            text-decoration: none;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        .btn-vcard {
+            background: #0f172a;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Navegación Inferior */
         .bottom-nav {
             background: #090d16;
             display: flex;
@@ -134,21 +196,21 @@
             gap: 3px;
             cursor: pointer;
         }
-        .nav-item i { font-size: 14px; }
-        .nav-item:hover { color: #ef4444; }
 
+        /* Pie de Marca Blindado Konfío Zinc */
         .brand-footer {
             background: #090d16;
-            color: #64748b;
-            font-size: 8px;
+            color: #94a3b8;
+            font-size: 9px;
             text-align: center;
-            padding-bottom: 8px;
-            padding-top: 2px;
-            font-weight: 600;
+            padding: 8px 4px;
+            font-weight: 800;
             letter-spacing: 0.5px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
         }
 
+        /* Modales */
         .modal-overlay {
             position: absolute;
             inset: 0;
@@ -168,112 +230,153 @@
             overflow: hidden;
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
         }
+        .modal-header {
+            background: #dc2626;
+            color: white;
+            padding: 12px 16px;
+            font-weight: 800;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+        }
+
+        .toast {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: #ffffff;
+            border: 1px solid #dc2626;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            display: none;
+            z-index: 60;
+        }
     </style>
 </head>
 <body>
 
     <div class="card-container">
-        <!-- Header -->
-        <div class="card-header">
-            <span class="badge-sanitary"><i class="fas fa-check-circle"></i> Garantía Sanitaria</span>
-            
-            <!-- LOGO SVG NATIVO (Garantizado sin dependencias) -->
-            <div class="avatar-circle">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m8 2 1.88 1.88"/>
-                    <path d="M14.12 3.88 16 2"/>
-                    <path d="M9 7.13v-1a3.003 3.003 0 0 1 6 0v1"/>
-                    <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/>
-                    <path d="M12 20v2"/>
-                    <path d="M6 11H4"/>
-                    <path d="M20 11h-2"/>
-                    <path d="M6 15H3"/>
-                    <path d="M21 15h-3"/>
-                </svg>
-                <span style="font-size: 6px; font-weight: 900; color: #0f172a; margin-top: 1px; letter-spacing: -0.2px;">FUMIG MASTER</span>
+        <div>
+            <!-- Header -->
+            <div class="card-header">
+                <span class="badge-sanitary">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    Garantía Sanitaria
+                </span>
+                
+                <!-- Logo Avatar SVG Nativo -->
+                <div class="avatar-circle">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m8 2 1.88 1.88"/>
+                        <path d="M14.12 3.88 16 2"/>
+                        <path d="M9 7.13v-1a3.003 3.003 0 0 1 6 0v1"/>
+                        <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/>
+                        <path d="M12 20v2"/>
+                        <path d="M6 11H4"/>
+                        <path d="M20 11h-2"/>
+                        <path d="M6 15H3"/>
+                        <path d="M21 15h-3"/>
+                    </svg>
+                    <span style="font-size: 6px; font-weight: 900; color: #0f172a; margin-top: 1px; letter-spacing: -0.2px;">FUMIG MASTER</span>
+                </div>
+                
+                <h1 class="title-main">Fumig Master</h1>
+                <div class="title-sub">Manejo Integrado de Plagas</div>
+                
+                <div class="promo-banner">
+                    🚫 ¡Di adiós a las plagas!
+                </div>
             </div>
-            
-            <h1 class="text-2xl font-black tracking-tight" style="margin: 0;">Fumig Master</h1>
-            <p class="text-xs font-semibold text-red-100" style="margin-top: 2px;">Manejo Integrado de Plagas</p>
-            
-            <div style="margin-top: 8px; background: rgba(0,0,0,0.25); display: inline-block; padding: 4px 12px; border-radius: 20px;">
-                <span class="text-xs font-bold text-white"><i class="fas fa-ban text-red-300"></i> ¡Di adiós a las plagas!</span>
+
+            <!-- Cuerpo Interactivo -->
+            <div class="content-body">
+                
+                <!-- Botón Principal WhatsApp -->
+                <a href="https://wa.me/573013600313?text=Hola%20Fumig%20Master,%20solicito%20una%20cotizacion." target="_blank" class="btn-whatsapp">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    Solicitar Cotización Ya
+                </a>
+
+                <!-- Grilla de Servicios con SVGs -->
+                <div class="grid-services">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 0 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v2"/><path d="M6 11H4"/><path d="M20 11h-2"/><path d="M6 15H3"/><path d="M21 15h-3"/></svg>
+                        </div>
+                        <span class="service-text">Cucarachas & Chinches</span>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 12c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3z"/><path d="M12 6c-3 0-5 2-5 5s2 5 5 5 5-2 5-5-2-5-5-5z"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m4.93 19.07 4.24-4.24"/></svg>
+                        </div>
+                        <span class="service-text">Hormigas & Insectos</span>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+                        </div>
+                        <span class="service-text">Control de Roedores</span>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                        </div>
+                        <span class="service-text">Desinfección Total</span>
+                    </div>
+                </div>
+
+                <!-- Llamada Directa -->
+                <a href="tel:+573013600313" class="btn-phone">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Línea Directa: 301 360 0313
+                </a>
+
+                <!-- Guardar Contacto vCard -->
+                <button id="btn-vcard" class="btn-vcard">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                    Guardar Contacto en Agenda
+                </button>
+
             </div>
         </div>
 
-        <!-- Cuerpo Interactivo -->
-        <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; padding-bottom: 90px;">
-            
-            <!-- Botón Principal WhatsApp -->
-            <a href="https://wa.me/573013600313?text=Hola%20Fumig%20Master,%20solicito%20una%20cotizacion." target="_blank" class="btn-whatsapp">
-                <i class="fab fa-whatsapp text-lg"></i> Solicitar Cotización Ya
-            </a>
-
-            <!-- Grilla de Servicios con SVGs Fijos -->
-            <div class="grid-services">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-bug"></i></div>
-                    <span class="service-text">Cucarachas & Chinches</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-spider"></i></div>
-                    <span class="service-text">Hormigas & Insectos</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-shield-virus"></i></div>
-                    <span class="service-text">Control de Roedores</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-pump-medical"></i></div>
-                    <span class="service-text">Desinfección Total</span>
-                </div>
-            </div>
-
-            <!-- Llamada Directa -->
-            <a href="tel:+573013600313" style="text-decoration: none; background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; color: #1e293b; font-weight: 700; font-size: 11px;">
-                <i class="fas fa-phone text-red-600"></i> Línea Directa: 301 360 0313
-            </a>
-
-            <!-- Guardar Contacto vCard -->
-            <button id="btn-vcard" style="background: #0f172a; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
-                <i class="fas fa-address-card text-red-500"></i> Guardar Contacto en Agenda
-            </button>
-
-        </div>
-
-        <!-- Footer Bar & Marca Registrada Konfío Zinc -->
-        <div style="position: absolute; bottom: 0; left: 0; right: 0;">
+        <!-- Navegación Inferior & Firma de Marca -->
+        <div>
             <div class="bottom-nav">
                 <button class="nav-item" onclick="openModal('modal-services')">
-                    <i class="fas fa-list-check"></i>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="m9 14 2 2 4-4"/></svg>
                     <span>Servicios</span>
                 </button>
                 <button class="nav-item" onclick="openModal('modal-gallery')">
-                    <i class="fas fa-images"></i>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
                     <span>Galería</span>
                 </button>
                 <button class="nav-item" onclick="openModal('modal-guarantee')">
-                    <i class="fas fa-shield-halved"></i>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
                     <span>Garantía</span>
                 </button>
                 <button class="nav-item" onclick="openModal('modal-qr')">
-                    <i class="fas fa-qrcode"></i>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
                     <span>QR</span>
                 </button>
             </div>
             
-            <!-- MARCA CORPORATIVA UNIFICADA -->
             <div class="brand-footer">
-                CREADO POR <strong style="color: #94a3b8;">KONFÍO ZINC</strong> — TODOS LOS DERECHOS RESERVADOS
+                <strong style="color: #38bdf8;">KONFÍO ZINC</strong> @TODOS LOS DERECHOS RESERVADOS
             </div>
         </div>
 
         <!-- Modales -->
         <div id="modal-services" class="modal-overlay" onclick="closeModal('modal-services')">
             <div class="modal-box" onclick="event.stopPropagation()">
-                <div style="background: #dc2626; color: white; padding: 12px 16px; font-weight: 800; font-size: 12px; display: flex; justify-content: space-between;">
-                    <span>SERVICIOS ESPECIALIZADOS</span>
-                    <span style="cursor:pointer;" onclick="closeModal('modal-services')">&times;</span>
+                <div class="modal-header">
+                    <span>Servicios Especializados</span>
+                    <span style="cursor:pointer;" onclick="closeModal('modal-services')">✕</span>
                 </div>
                 <div style="padding: 16px; font-size: 11px; color: #334155; line-height: 1.5;">
                     <p><strong>• Fumigación Residencial y Comercial:</strong> Eliminación de cucarachas, chinches, pulgas y garrapatas.</p>
@@ -282,13 +385,40 @@
             </div>
         </div>
 
-        <div id="modal-qr" class="modal-overlay" onclick="closeModal('modal-qr')">
-            <div class="modal-box" onclick="event.stopPropagation()" style="text-align: center; padding: 20px;">
-                <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 12px;">ESCANEA PARA COMPARTIR</h3>
-                <div id="qrcode" style="display: flex; justify-content: center;"></div>
-                <button onclick="closeModal('modal-qr')" style="margin-top: 16px; background: #dc2626; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 10px;">CERRAR</button>
+        <div id="modal-gallery" class="modal-overlay" onclick="closeModal('modal-gallery')">
+            <div class="modal-box" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <span>Evidencia de Control</span>
+                    <span style="cursor:pointer;" onclick="closeModal('modal-gallery')">✕</span>
+                </div>
+                <div style="padding: 16px; text-align: center;">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=400" alt="Fumigación" style="width: 100%; border-radius: 12px; height: 130px; object-fit: cover;">
+                    <p style="font-size: 10px; color: #64748b; margin-top: 8px;">Manejo integrado de plagas con estándares de seguridad ambiental.</p>
+                </div>
             </div>
         </div>
+
+        <div id="modal-guarantee" class="modal-overlay" onclick="closeModal('modal-guarantee')">
+            <div class="modal-box" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <span>Garantía Sanitaria</span>
+                    <span style="cursor:pointer;" onclick="closeModal('modal-guarantee')">✕</span>
+                </div>
+                <div style="padding: 16px; font-size: 11px; color: #334155; line-height: 1.5;">
+                    Tratamientos certificados con productos biodegradables y seguros para niños y mascotas, cumpliendo normativas de salud pública.
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-qr" class="modal-overlay" onclick="closeModal('modal-qr')">
+            <div class="modal-box" onclick="event.stopPropagation()" style="text-align: center; padding: 20px;">
+                <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 12px; text-transform: uppercase;">Escanea para Compartir</h3>
+                <div id="qrcode" style="display: flex; justify-content: center;"></div>
+                <button onclick="closeModal('modal-qr')" style="margin-top: 16px; background: #dc2626; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 10px; cursor: pointer;">CERRAR</button>
+            </div>
+        </div>
+
+        <div id="toast" class="toast">Contacto guardado en agenda</div>
 
     </div>
 
@@ -308,14 +438,23 @@
                 });
             }
 
+            const toast = document.getElementById('toast');
+            const showToast = (msg) => {
+                toast.textContent = msg;
+                toast.style.display = 'block';
+                setTimeout(() => toast.style.display = 'none', 2200);
+            };
+
             document.getElementById('btn-vcard').addEventListener('click', () => {
                 const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Fumig Master\nORG:Fumigacion Profesional\nTEL;TYPE=CELL:+573013600313\nNOTE:Control especializado de plagas.\nEND:VCARD`;
-                const blob = new Blob([vCardData], { type: 'text/vcard' });
+                const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = 'Fumig_Master.vcf';
                 a.click();
+                URL.revokeObjectURL(url);
+                showToast('Contacto guardado en agenda');
             });
         });
     </script>
