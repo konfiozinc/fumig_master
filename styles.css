@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+        
+        * { font-family: 'Inter', system-ui, -apple-system, sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #0f172a; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        /* Chasis Fijo Móvil (380px max-width) */
+        .card-container {
+            width: 100%;
+            max-width: 380px;
+            height: 100vh;
+            max-height: 750px;
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #dc2626;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Header Rojo Corporativo */
+        .card-header {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 24px 20px 20px 20px;
+            text-align: center;
+            border-bottom-left-radius: 32px;
+            border-bottom-right-radius: 32px;
+            position: relative;
+        }
+
+        .avatar-circle {
+            width: 80px;
+            height: 80px;
+            background: #ffffff;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            border: 3px solid #fecdd3;
+        }
+
+        .badge-sanitary {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.35);
+            color: white;
+            font-size: 8px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .title-main { font-size: 22px; font-weight: 900; color: #ffffff; margin: 0; }
+        .title-sub { font-size: 11px; font-weight: 700; color: #fecdd3; margin-top: 2px; }
+
+        .promo-banner {
+            margin-top: 8px;
+            background: rgba(0,0,0,0.25);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* Cuerpo Interactivo */
+        .content-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+        }
+
+        /* Botón WhatsApp */
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            padding: 14px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+        }
+
+        /* Grilla de Servicios con SVGs */
+        .grid-services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .service-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .service-icon {
+            width: 28px;
+            height: 28px;
+            background: #fee2e2;
+            color: #dc2626;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .service-text { font-size: 10px; font-weight: 700; color: #334155; line-height: 1.2; }
+
+        .btn-phone {
+            text-decoration: none;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        .btn-vcard {
+            background: #0f172a;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Navegación Inferior */
+        .bottom-nav {
+            background: #090d16;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 6px 6px 6px;
+            border-top: 1px solid #1e293b;
+        }
+        .nav-item {
+            color: #94a3b8;
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 9px;
+            font-weight: 600;
+            gap: 3px;
+            cursor: pointer;
+        }
+
+        /* Pie de Marca Blindado Konfío Zinc */
+        .brand-footer {
+            background: #090d16;
+            color: #94a3b8;
+            font-size: 9px;
+            text-align: center;
+            padding: 8px 4px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+        }
+
+        /* Modales */
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 50;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            background: #dc2626;
+            color: white;
+            padding: 12px 16px;
+            font-weight: 800;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+        }
+
+        .toast {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: #ffffff;
+            border: 1px solid #dc2626;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            display: none;
+            z-index: 60;
+        }
+html,body{overflow-x:hidden}img,svg,video{max-width:100%;height:auto}table{max-width:100%}
