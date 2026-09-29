@@ -1,0 +1,16 @@
+{
+  "name": "Fumig Master",
+  "short_name": "Fumig Master",
+  "description": "Servicio profesional de fumigación y manejo integrado de plagas.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#dc2626",
+  "theme_color": "#dc2626",
+  "lang": "es",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/apple-touch-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}
